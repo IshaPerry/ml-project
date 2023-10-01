@@ -21,6 +21,7 @@ st.title("Datasets")
 url = "https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images/data"
 
 st.markdown("[Dataset Link](%s)" % url)
+st.markdown("Our dataset includes 60,000 synthetically-generated images (made with Stable Diffusion), 60,000 real images, 100,000 images for training, and 20,000 images for testing.")
 
 st.title("References")
 
