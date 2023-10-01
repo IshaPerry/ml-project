@@ -33,7 +33,11 @@ st.markdown("Our dataset includes 60,000 synthetically-generated images (made wi
 st.divider()
 
 st.title("References")
-st.image("references_screenshot.png")
+st.markdown("[1] Bird, J. J., & Lotfi, A. (2023, March 24). CIFAKE: Image classification and explainable identification of AI-generated synthetic images. arXiv.org. https://arxiv.org/abs/2303.14126")
+st.markdown("[2] Krizhevsky, A. (2009). Learning multiple layers of features from tiny images - semantic scholar. https://www.semanticscholar.org/paper/Learning-Multiple-Layers-of-Features-from-Tiny-Krizhevsky/5d90f06bb70a0a3dced62413346235c02b1aa086 ")
+st.markdown("[3] Lu, Z., Huang, D., Bai, L., Qu, J., Wu, C., Liu, X., & Ouyang, W. (2023, September 22). Seeing is not always believing: Benchmarking human and model perception of AI-generated images. arXiv.org. https://arxiv.org/abs/2304.13023v3 ")
+st.markdown("[4] Maher Salman , F., & S. Abu-Nase, S. (2022). Classification of Real and Fake Human Faces Using Deep Learning. https://philpapers.org/archive/SALCOR-3.pdf ")
+
 st.divider()
 
 
