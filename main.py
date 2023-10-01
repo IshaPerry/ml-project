@@ -2,30 +2,39 @@ import streamlit as st
 import pandas as pd
 
 
+st.title("Classifying Images: Real Vs AI Generated")
+st.caption("Members: Isha Perry, Ariane Richard, Emily Wu, Sydney Defelice, Claire Matheny")
+st.divider()
 
 st.title("Introduction/Background")
 st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, which once served as proof of an event. In fact, research shows that humans misclassify real images from AI generated photos at a rate of 38.7% (Lu et al., 2023). AI-generated images can have a widespread negative impact from creating false alibis, winning art-competitions, and generating false historical and current events images. The dataset utilized for this project is obtained from Kaggle.com and contains 120,000 images. Its features consist of 60,000 synthetically-generated (fake) images and 60,000 real images that were obtained from CIFAR-10. 10,000 images of those two categories compose the testing data.")
+st.divider()
 
 st.title("Problem Definition")
 st.markdown("AI-generated images allow for the manipulation of reality. The motivation of this project is to identify images as real (non AI-generated) or fake (AI-generated) to a high degree of accuracy.")
+st.divider()
 
 st.title("Methods")
 st.markdown("To classify images into our two prediction categories (real or fake), we will be utilizing both supervised and unsupervised learning techniques to cross analyze detection accuracy. For unsupervised learning, we will be utilizing a convoluted neural network (CNN). Using a CNN, we can leverage image matrix inputs to extract features that get progressively more accurate with each layer. For unsupervised learning, we will be utilizing K-Means Clustering (via scikit-learn) to create clusters of images that share characteristics with those within their cluster, and dissimilar to those outside of their cluster. In both cases, several image processing techniques are required to assign weights that are propagated throughout the network. For image processing, we will be using various Python libraries such as OpenCV, Scikit-image, PIL (Python Image Library), NumPy, and Mahotas.")
+st.divider()
 
 
 st.title("Potential Results/Discussion")
 st.markdown("By comparing multiple models of classification, we will be able to determine the best model for identifying real and AI generated photos. Because of the humans' previously stated ~40% accuracy of this classification, we can define success as any model classifying images with accuracy above a human’s 38.7%. Knowing that this is a lower number, we have also found evidence that most modern classification AI algorithms can reach accuracy levels of ~87% (Lu et al., 2023), so we will be aiming for this level of accuracy as well. We also want to assess precision (to identify the rate of false positives), recall (to identify the rate of false negatives), and f1 (a metric to help combine precision and recall). To help extract values for our success criteria, we will use sklearn.metrics library and the testing set from our data set, allowing us to easily extract quantitative metrics. ")
+st.divider()
 
 st.title("Proposed Timeline")
+st.divider()
 
 st.title("Datasets")
 url = "https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images/data"
-
 st.markdown("[Dataset Link](%s)" % url)
 st.markdown("Our dataset includes 60,000 synthetically-generated images (made with Stable Diffusion), 60,000 real images, 100,000 images for training, and 20,000 images for testing.")
+st.divider()
 
 st.title("References")
-
+st.image("references_screenshot.png")
+st.divider()
 
 
 
