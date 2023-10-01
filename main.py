@@ -13,6 +13,7 @@ st.markdown('Our Project')
 st.text('Fixed width text')
 
 st.title("Methods")
+st.markdown("To classify images into our two prediction categories (real or fake), we will be utilizing both supervised and unsupervised learning techniques to cross analyze detection accuracy. For unsupervised learning, we will be utilizing a convoluted neural network (CNN). Using a CNN, we can leverage image matrix inputs to extract features that get progressively more accurate with each layer. For unsupervised learning, we will be utilizing K-Means Clustering (via scikit-learn) to create clusters of images that share characteristics with those within their cluster, and dissimilar to those outside of their cluster. In both cases, several image processing techniques are required to assign weights that are propagated throughout the network. For image processing, we will be using various Python libraries such as OpenCV, Scikit-image, PIL (Python Image Library), NumPy, and Mahotas.")
 
 
 st.title("Potential Results/Discussion")
