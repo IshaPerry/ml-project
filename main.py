@@ -4,10 +4,10 @@ import pandas as pd
 
 
 st.title("Introduction/Background")
-
-
+st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, which once served as proof of an event. In fact, research shows that humans misclassify real images from AI generated photos at a rate of 38.7% (Lu et al., 2023). AI-generated images can have a widespread negative impact from creating false alibis, winning art-competitions, and generating false historical and current events images. The dataset utilized for this project is obtained from Kaggle.com and contains 120,000 images. Its features consist of 60,000 synthetically-generated (fake) images and 60,000 real images that were obtained from CIFAR-10. 10,000 images of those two categories compose the testing data.")
 
 st.title("Problem Definition")
+st.markdown("AI-generated images allow for the manipulation of reality. The motivation of this project is to identify images as real (non AI-generated) or fake (AI-generated) to a high degree of accuracy.")
 
 st.markdown('Our Project')
 st.text('Fixed width text')
@@ -16,19 +16,7 @@ st.title("Methods")
 
 
 st.title("Potential Results/Discussion")
-st.markdown("By comparing multiple models of classification, we will be "
-            "able to determine the best classification model for Because "
-            "of the previously stated ~40% accuracy of humans when classifying "
-            "real vs AI, we can define success as any model classifying images "
-            "with accuracy above a human’s 38.7%. Knowing that this is a lower "
-            "number, we have also found evidence that most modern classification "
-            "AI algorithms can reach accuracy levels of ~87% (Lu et al., 2023), "
-            "so we will be aiming for this level of accuracy as well. We also want "
-            "to assess precision (to identify the rate of false positives), recall "
-            "(to identify the rate of false negatives), and f1 (a metric to help "
-            "combine precision and recall). To help extract values for our success "
-            "criteria, we will use sklearn.metrics library and the testing set from "
-            "our data set, allowing us to easily extract quantitative metrics. ")
+st.markdown("By comparing multiple models of classification, we will be able to determine the best model for identifying real and AI generated photos. Because of the previously stated ~40% accuracy of humans when classifying real vs AI, we can define success as any model classifying images with accuracy above a human’s 38.7%. Knowing that this is a lower number, we have also found evidence that most modern classification AI algorithms can reach accuracy levels of ~87% (Lu et al., 2023), so we will be aiming for this level of accuracy as well. We also want to assess precision (to identify the rate of false positives), recall (to identify the rate of false negatives), and f1 (a metric to help combine precision and recall). To help extract values for our success criteria, we will use sklearn.metrics library and the testing set from our data set, allowing us to easily extract quantitative metrics. ")
 
 st.title("Proposed Timeline")
 
