@@ -4,11 +4,11 @@ import base64
 
 
 st.title("Classifying Images: Real Vs AI Generated")
-st.caption("Members: Isha Perry, Ariane Richard, Emily Wu, Sydney Defelice, Claire Matheny")
+st.caption("Members: Sydney Defelice, Claire Matheny, Isha Perry, Ariane Richard, Emily Wu")
 st.divider()
 
 st.title("Introduction/Background")
-st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, which once served as proof of an event. In fact, research shows that humans misclassify real images from AI generated photos at a rate of 38.7% (Lu et al., 2023). AI-generated images can have a widespread negative impact from creating false alibis, winning art-competitions, and generating false historical and current events images. The dataset utilized for this project is obtained from Kaggle.com and contains 120,000 images. Its features consist of 60,000 synthetically-generated (fake) images and 60,000 real images that were obtained from CIFAR-10. 10,000 images of those two categories compose the testing data.")
+st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, which once served as proof of an event. In fact, research shows that humans misclassify real images from AI generated photos at a rate of 38.7% (Lu et al., 2023). AI-generated images can have a widespread negative impact from creating false alibis, winning art-competitions, and generating false historical and current events images. The dataset utilized for this project is obtained from Kaggle.com and contains 120,000 images. Its features consist of 60,000 synthetically-generated (fake) images made with Stable Diffusion and 60,000 real images obtained from CIFAR-10. 10,000 images from each feature make up the testing data while the remaining are the training data.")
 st.divider()
 
 st.title("Problem Definition")
@@ -49,7 +49,7 @@ st.divider()
 st.title("Datasets")
 url = "https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images/data"
 st.markdown("[Dataset Link](%s)" % url)
-st.markdown("Our dataset includes 60,000 synthetically-generated images (made with Stable Diffusion), 60,000 real images, 100,000 images for training, and 20,000 images for testing.")
+st.markdown("Our dataset includes 60,000 synthetically-generated images and 60,000 real images where 100,000 of those are for training and 20,000 are for testing.")
 st.divider()
 
 st.title("References")
