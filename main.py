@@ -1,23 +1,28 @@
 import streamlit as st
 import pandas as pd
+import base64
 
 
+st.title("Classifying Images: Real Vs AI Generated")
+st.caption("Members: Isha Perry, Ariane Richard, Emily Wu, Sydney Defelice, Claire Matheny")
+st.divider()
 
 st.title("Introduction/Background")
-
-
+st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, which once served as proof of an event. In fact, research shows that humans misclassify real images from AI generated photos at a rate of 38.7% (Lu et al., 2023). AI-generated images can have a widespread negative impact from creating false alibis, winning art-competitions, and generating false historical and current events images. The dataset utilized for this project is obtained from Kaggle.com and contains 120,000 images. Its features consist of 60,000 synthetically-generated (fake) images and 60,000 real images that were obtained from CIFAR-10. 10,000 images of those two categories compose the testing data.")
+st.divider()
 
 st.title("Problem Definition")
-
-st.markdown('Our Project')
-st.text('Fixed width text')
+st.markdown("AI-generated images allow for the manipulation of reality. The motivation of this project is to identify images as real (non AI-generated) or fake (AI-generated) to a high degree of accuracy.")
+st.divider()
 
 st.title("Methods")
+st.markdown("To classify images into our two prediction categories (real or fake), we will be utilizing both supervised and unsupervised learning techniques to cross analyze detection accuracy. For supervised learning, we will be utilizing a convoluted neural network (CNN). Using a CNN, we can leverage image matrix inputs to extract features that get progressively more accurate with each layer. For unsupervised learning, we will be utilizing K-Means Clustering (via scikit-learn) to create clusters of images that share characteristics with those within their cluster, and dissimilar to those outside of their cluster. In both cases, several image processing techniques are required to assign weights that are propagated throughout the network. For image processing, we will be using various Python libraries such as OpenCV, Scikit-image, PIL (Python Image Library), NumPy, and Mahotas.")
+st.divider()
 
 
 st.title("Potential Results/Discussion")
-st.markdown("By comparing multiple models of classification, we will be able to determine the best" 
-            "classification model for Because of the previously stated ~40% accuracy of humans when" 
+st.markdown("By comparing multiple models of classification, we will be able to determine the best"
+            "classification model for Because of the previously stated ~40% accuracy of humans when"
             "classifying real vs AI, we can define success as any model classifying images with accuracy"
             "above a human’s 38.7%. Knowing that this is a lower number, we have also found evidence that"
             "most modern classification AI algorithms can reach accuracy levels of ~87% (Lu et al., 2023),"
@@ -29,15 +34,31 @@ st.markdown("By comparing multiple models of classification, we will be able to 
 
 
 
-        
+
 
 
 st.title("Proposed Timeline")
 
+with open("ganntchart.pdf","rb") as f:
+      base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
+
+st.markdown(pdf_display, unsafe_allow_html=True)
+st.divider()
+
 st.title("Datasets")
+url = "https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images/data"
+st.markdown("[Dataset Link](%s)" % url)
+st.markdown("Our dataset includes 60,000 synthetically-generated images (made with Stable Diffusion), 60,000 real images, 100,000 images for training, and 20,000 images for testing.")
+st.divider()
 
 st.title("References")
+st.markdown("[1] Bird, J. J., & Lotfi, A. (2023, March 24). CIFAKE: Image classification and explainable identification of AI-generated synthetic images. arXiv.org. https://arxiv.org/abs/2303.14126")
+st.markdown("[2] Krizhevsky, A. (2009). Learning multiple layers of features from tiny images - semantic scholar. https://www.semanticscholar.org/paper/Learning-Multiple-Layers-of-Features-from-Tiny-Krizhevsky/5d90f06bb70a0a3dced62413346235c02b1aa086 ")
+st.markdown("[3] Lu, Z., Huang, D., Bai, L., Qu, J., Wu, C., Liu, X., & Ouyang, W. (2023, September 22). Seeing is not always believing: Benchmarking human and model perception of AI-generated images. arXiv.org. https://arxiv.org/abs/2304.13023v3 ")
+st.markdown("[4] Maher Salman , F., & S. Abu-Nase, S. (2022). Classification of Real and Fake Human Faces Using Deep Learning. https://philpapers.org/archive/SALCOR-3.pdf ")
 
+st.divider()
 
 
 
