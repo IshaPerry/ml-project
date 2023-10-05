@@ -39,6 +39,12 @@ image = Image.open('contributionchart.png')
 st.image(image, caption='Contribution Chart')
 st.divider()
 
+st.title("Checkpoints")
+st.markdown("1. Clean data by 10/20/23")
+st.markdown("2. Complete K-Means Model by midterm report")
+st.markdown("3. Meet with mentor week of 11/15 and complete CNN model")
+st.divider()
+
 
 
 st.title("Datasets")
