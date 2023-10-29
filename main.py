@@ -3,7 +3,6 @@ import pandas as pd
 import base64
 from PIL import Image
 
-
 st.title("Classifying Images: Real Vs AI Generated")
 st.caption("Members: Sydney Defelice, Claire Matheny, Isha Perry, Ariane Richard, Emily Wu")
 st.divider()
