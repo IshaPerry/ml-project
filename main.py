@@ -8,7 +8,15 @@ st.caption("Members: Sydney Defelice, Claire Matheny, Isha Perry, Ariane Richard
 st.divider()
 
 st.title("Introduction/Background")
-st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, which serves as proof of an event. In fact, research shows that humans misclassify real images from AI-generated photos at a rate of 38.7% (Lu et al., 2023). AI-generated images can have a widespread negative impact from creating false alibis, winning art competitions, and generating false historical and current events images. The dataset utilized for this project is obtained from Kaggle.com and contains 120,000 images. Its features consist of 60,000 synthetically-generated images made with Stable Diffusion and 60,000 real images obtained from CIFAR-10. 10,000 images from each feature makes up the testing data while the remaining are the training data.")
+st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, which often times serves as proof of an event."
+      " In fact, research shows that humans misclassify real images from AI-generated photos at a rate of 38.7% (Lu et al., 2023). AI-generated images can have"
+      " widespread negative impacts by creating false alibis, taking creative reins from real people, and attempting to falsify historical and current events. "
+      " It is important, more than ever, that people are able to quickly tell an AI generated image from a false one. The world is already a chaotic place, "
+      " rife with political tensions and obsessions over social media, and the last thing the world need is fake images spreading lies.")
+st.markdown(" Our objective with this project is to be able to train a omdel to correctly classify AI generated images vs real images with more accuracy than a human."
+
+      " To do this we will utilize a dataset from Kaggle.com that contains 120,000 images (https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images/data)."
+      " Its features consist of 60,000 synthetically-generated images made with Stable Diffusion and 60,000 real images obtained from CIFAR-10. 10,000 images from each feature makes up the testing data while the remaining are the training data.")
 st.divider()
 
 st.title("Problem Definition")
