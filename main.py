@@ -82,7 +82,7 @@ tab1.write("We loaded, flattened, and standardized the images and applied PCA to
             "Lastly, we plotted a graph comparing the number of principal components to the cumulative explained variance "
             "for further analysis.")
 tab1.write("Below is a snippet of the PCA code. ")
-tab1.code("# Step 1: Perform PCA\n# Number of components\nn_components = data_matrix.shape[1]\npca = PCA(n_components=n_components)\npca.fit(data_matrix)", language="python")
+tab1.code("n_components = data_matrix.shape[1]\npca = PCA(n_components=n_components)\npca.fit(data_matrix)", language="python")
 tab2.write("For our supervised learning model, we decided to use a Convolutional Neural Network (CNN). "
            "CNNs are designed for image recognition and recognition-based tasks, making it ideal for our goal "
            "of classifying images as either real or AI-generated. This model sequentially uses inputs from the previous "
@@ -131,7 +131,7 @@ tab1.write("The compression ratio shows that each retained principal component r
 
 tab2.write("For both CNN models (gray and RGB images), we found a decent amount of fluctuation in our accuracy for both training "
            "data and testing data over time. However, when running CNN with a greater number of epochs, we saw that our accuracy "
-           "values leveled out with our training accuracy settling higher than our test data. This result was expected, "
+           "values leveled out with our training accuracy which settled higher than our test data. This result was expected, "
            "and due to the fact that our plot lines for train accuracy and test accuracy are relatively close to each other, "
            "we can safely assume we have achieved minimal overfitting. We found very similar accuracy levels between our two "
            "different models, with an accuracy value of roughly 0.9148 for our grayscale CNN model and 0.9186 for our RGB CNN model. "
