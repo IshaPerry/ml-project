@@ -93,8 +93,8 @@ tab2.write("In order to implement CNN, we leveraged Keras (a library built on to
            "The first convolutional layer uses 32 filters that correspond with the input shape of (32, 32, 1) for grayscale "
            "images and (32, 32, 3) for RGB images. Additionally, we use the ReLu activation function to introduce non-linearity in the data. "
            "In the next convolutional layer, we increase the number of filters to 64 in order to learn even more complex patterns. "
-           "The last convolutional layer applies 64 filters and ReLu activation another time. The sequence of each our layers is shown below:")
-image = Image.open('flowchart.jpeg')
+           "The last convolutional layer applies 64 filters and ReLu activation another time. The sequence of each of our layers is shown below:")
+image = Image.open('flowchart_updated.jpeg')
 tab2.image(image)
 tab2.write("At first, we ran the model using 5 epochs. However, we noticed that the accuracy of testing data for both "
            "grayscale and RGB images was higher than the accuracy of training data. This result goes against our intuition that, "
