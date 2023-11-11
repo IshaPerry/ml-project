@@ -8,16 +8,16 @@ st.caption("Members: Sydney Defelice, Claire Matheny, Isha Perry, Ariane Richard
 st.divider()
 
 st.title("Introduction/Background")
-st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs,"
-            " which oftentimes serve as proof of an event. In fact, research shows that humans misclassify real"
-            " images from AI-generated ones at a rate of 38.7% (Lu et al., 2023). AI-generated images can have"
-            " widespread negative impacts by creating false alibis, taking creative reins from real people,"
-            " amplifying stereotypes, and attempting to falsify historical and current events (Partadiredja et al., 2020;"
-            " Ragot et al., 2020; Tiku et al., 2023; Verma, 2023). It is important, more than ever, that people are able"
-            " to quickly tell an AI-generated image from a false one, especially in an age where data reliability and"
-            " authentication is essential (Bird & Lotfi, 2023). The world is already a chaotic place, rife with political"
-            "  tensions and obsessions over social media, and the last thing the world needs is fake images spreading misinformation.")
-st.markdown("The dataset utilized for this project is obtained from Kaggle.com and contains 120,000 images."
+st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, "
+            "which oftentimes serve as proof of an event. In fact, research shows that humans misclassify real images "
+            "from AI-generated ones at a rate of 38.7% (Lu et al., 2023). AI-generated images can have widespread negative "
+            "impacts by creating false alibis, taking creative reins from real people, amplifying stereotypes, and attempting "
+            "to falsify historical and current events (Partadiredja et al., 2020; Ragot et al., 2020; Tiku et al., 2023; Verma, 2023). "
+            "It is important, more than ever, that people are able to quickly tell an AI-generated image from a real one, "
+            "especially in an age where data reliability and authentication is essential (Bird & Lotfi, 2023). "
+            "The world is already a chaotic place, rife with political tensions and obsessions over social media, "
+            "and the last thing the world needs is fake images spreading misinformation.")
+st.markdown("The dataset utilized for this project is obtained from https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images/data and contains 120,000 images."
             " Its features consist of 60,000 synthetically generated (fake) images made with Stable Diffusion and 60,000"
             " real images obtained from CIFAR-10 (Krizhevsky & Hilton, 2023; Bird & Lotfi, 2023). 10,000 images of each category"
             " make up the testing data, while the remaining are the training data.")
@@ -31,14 +31,17 @@ st.markdown("AI-generated images allow for the manipulation of reality. "
 st.divider()
 
 st.title("Data Preprocessing")
-st.markdown("To classify images into our two categories (real or fake), we will be utilizing supervised and unsupervised learning techniques to cross analyze detection accuracy. For supervised learning, we will develop a convoluted neural network (CNN). Using CNN, we can leverage image matrix inputs to extract features that get progressively more accurate with each layer. For unsupervised learning, we will use K-Means Clustering (via scikit-learn) to create clusters of images that share characteristics with those within their cluster and are dissimilar to those outside of their cluster. In both cases, several image processing techniques are required to assign weights to different aspects of the image that are then propagated throughout the code. For image processing, we will be using various Python libraries such as OpenCV, Scikit-image, Python Image Library (PIL), NumPy, and Mahotas.")
+st.write("Prior to working with our unsupervised and supervised learning models, it was necessary to clean and pre-process "
+         "the data to run the models successfully. As described above, our dataset was pre-sorted into real and fake images "
+         "which was further divided into training and testing datasets. Additionally, the dataset indicated that it was pre-cleaned "
+         "and contained no duplicates. Therefore, we performed the following tasks to pre-process our dataset for CNN:")
 
 tab1, tab2, tab3 = st.tabs(["Resize the Images", "Normalize the Images", "Generate Grayscale and Color (RGB) Versions of the Images"])
 tab1.write("To ensure that all the images have the same dimensions, we resized the images to be (32x32x3)."
            "This will help ensure that our dataset can properly run in our models. To do so, when importing our"
            "images using the image_dataset_from_directory method from the tensorflow keras package, we changed"
-           "the size of the image by specifying the image_size metric to be (64, 64). Below is a snippet of our code:")
-tab1.code("tf_train_data = image_dataset_from_directory(directory = train_dir, label_mode = 'binary', image_size = (64, 64), shuffle=True)", language="python")
+           "the size of the image by specifying the image_size metric to be (32, 32). Below is a snippet of our code:")
+tab1.code("tf_train_data = image_dataset_from_directory(directory = train_dir, label_mode = 'binary', image_size = (32, 32), shuffle=True)", language="python")
 tab1.write("The image below displays 9 random images from our training data set and how they have been resized. The label above each image indicates their predetermined label.")
 image = Image.open('resizedImages.png')
 tab1.image(image, caption='Resized Images')
