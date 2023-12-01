@@ -76,82 +76,104 @@ lr.write( "logreg = LogisticRegression(C = 0.15)\nresults = logreg.fit(x_train, 
 
 st.divider()
 st.title("Results and Discussions:")
-tab1, tab2 = st.tabs(["Unsupervised Learning: Principal Component Analysis (PCA)", "Supervised Learning: Convolutional Neural Network (CNN)"])
-tab1.write("Principal Component Analysis (PCA) is an unsupervised learning method that reduces the number of features (dimensions)"
-           " in a data set while preserving dataset trends and patterns. The benefits of performing PCA include reducing the complexity "
-           "of the model and thus reducing the risk of overfitting the data. However, PCA can result in information loss if the "
-           "cumulative expected variance is too low. A low cumulative expected variance means that the selected components do not "
-           "relate to the original data’s variability, making the loss of information a negative consequence. ")
-tab1.write("For our dataset specifically, the trade-off between 95% and 99% cumulative expected variance must be considered. "
-           "On one hand, choosing the number of components that retain 99% of the cumulative expected variance ensures that the "
-           "finer details are preserved in the image. This is valuable when distinguishing between AI and real images, as these "
-           "details are imperceptible to the human eye. Specifically, research shows that humans misclassify real images from "
-           "AI-generated ones at a rate of 38.7% (Lu et al., 2023).  However, it is ultimately more beneficial to choose the number "
-           "of components that preserve 95% of the variance in the dataset as image data tends to be noisy and complex; by reducing "
-           "the noise in the data, we reduce the risk of overfitting our model. Our model aims to identify AI versus real images "
-           "with an accuracy of at least 87%. Therefore, an overfitted model is less likely to meet this goal as it will not be as "
-           "effective as a well-fit model in classifying the testing images. ")
+pca, cnn, cnnwpca, nb, lr = st.tabs(["Unsupervised Learning: Principal Component Analysis (PCA)", "Supervised Learning: Convolutional Neural Network (CNN)", "Supervised Learning: Convolutional Neural Network with PCA Processed Data", "Supervised Learning: Naive Bayes Classifier", "Supervised Learning: Logistic Regression"])
+pca.write("Principal Component Analysis (PCA) is an unsupervised learning method that reduces the number of features (dimensions) in a data set while preserving dataset trends and patterns. The benefits of performing PCA include reducing the complexity of the model and thus reducing the risk of overfitting the data. However, PCA can result in information loss if the cumulative expected variance is too low. A low cumulative expected variance means that the selected components do not relate to the original data’s variability, making the loss of information a negative consequence. ")
+pca.write("For our dataset specifically, the trade-off between 95% and 99% cumulative expected variance must be considered. On one hand, choosing the number of components that retain 99% of the cumulative expected variance ensures that the finer details are preserved in the image. This is valuable when distinguishing between AI and real images, as these details are imperceptible to the human eye. Specifically, research shows that humans misclassify real images from AI-generated ones at a rate of 38.7% (Lu et al., 2023).  However, it is ultimately more beneficial to choose the number of components that preserve 95% of the variance in the dataset as image data tends to be noisy and complex; by reducing unnecessary noise in the data, we reduce the risk of overfitting our model. Our model aims to identify AI versus real images with an accuracy of at least 87%. Therefore, an overfitted model is less likely to meet this goal as it will not be as effective as a well-fit model in classifying the testing images. ")
 image = Image.open('pcaresults.png')
-tab1.image(image)
-tab1.write("The benefits of using 254 components to capture 95% of the cumulative expected variance versus 664 components to capture 99% of "
-           "the cumulative expected variance is justified by the compression ratio. ")
+pca.image(image)
+pca.write("The benefits of using 298 components to capture 95% of the cumulative expected variance versus 712 components to capture 99% of the cumulative expected variance is justified by the compression ratio. ")
 image = Image.open('pcacoderesults.png')
-tab1.image(image)
-tab1.write("The compression ratio shows that each retained principal component represents information from approximately 12 original features. "
-           "By choosing 254 components over 664 components, we ensure that our model will be computationally efficient with an acceptable level of information loss. ")
+pca.image(image)
+pca.write("The compression ratio shows that each retained principal component represents information from approximately 12 original features. By choosing 298 components over 712 components, we ensure that our model will be computationally efficient with an acceptable level of information loss. ")
 
-tab2.write("For both CNN models (gray and RGB images), we found a decent amount of fluctuation in our accuracy for both training "
-           "data and testing data over time. However, when running CNN with a greater number of epochs, we saw that our accuracy "
-           "values leveled out with our training accuracy which settled higher than our test data. This result was expected, "
-           "and due to the fact that our plot lines for train accuracy and test accuracy are relatively close to each other, "
-           "we can safely assume we have achieved minimal overfitting. We found very similar accuracy levels between our two "
-           "different models, with an accuracy value of roughly 0.9148 for our grayscale CNN model and 0.9186 for our RGB CNN model. "
-           "This metric tells us that our models were good at predicting labels of unknown data in comparison to the true labels. "
-           "The high performance of this CNN is likely due to both our convoluted layering structure "
-           "(i.e., built-in dimensionality reduction) and the large size of our dataset, which helps us reduce overfitting. ")
+cnn.write("For both CNN models (gray and RGB images), we found a decent amount of fluctuation in our accuracy for both training data and testing data over time. However, when running CNN with a greater number of epochs, we saw that our accuracy values leveled out with our training accuracy settling higher than our test data. This result was expected, and due to the fact that our plot lines for train accuracy and test accuracy are relatively close to each other, we can safely assume we have achieved minimal overfitting. We found very similar accuracy levels between our two different models, with an accuracy value of roughly 0.9148 for our grayscale CNN model and 0.9186 for our RGB CNN model. This metric tells us that our models were good at predicting labels of unknown data in comparison to the true labels. The high performance of this CNN is likely due to both our convoluted layering structure (i.e., built-in dimensionality reduction) and the large size of our dataset, which helps us reduce overfitting. ")
 image = Image.open('cnnresultgraph.png')
-tab2.image(image)
-tab2.write("While our CNN does have a high level of accuracy, this metric alone is not always reliable. "
-           "In the case of an unbalanced data set, accuracy becomes a poor evaluation metric as the model can achieve "
-           "high accuracy by simply predicting the majority label for every instance without us knowing. "
-           "While we do already know that our Kaggle dataset is balanced, we still decided to generate precision, recall, "
-           "and f1 scores (harmonic mean) to verify the conclusions we drew from our accuracy score. As displayed in the "
-           "classification reports shown below, we found that we also had high results for each additional metric for both "
-           "the gray and RGB models, giving us a more comprehensive evaluation of their overall performance. "
-           "Additionally, we found very little differences in f1 scores between our gray and RGB models, leading us to further "
-           "conclude that there is no significant difference in classifying images with our CNN when they are grayscale as "
-           "opposed to left in color.")
+cnn.image(image)
+cnn.write("While our CNN does have a high level of accuracy, this metric alone is not always reliable. In the case of an unbalanced data set, accuracy becomes a poor evaluation metric as the model can achieve high accuracy by simply predicting the majority label for every instance without us knowing. While we do already know that our Kaggle dataset is balanced, we still decided to generate precision, recall, and f1 scores (harmonic mean) to verify the conclusions we drew from our accuracy score. As displayed in the classification reports shown below, we found that we also had high results for each additional metric for both the gray and RGB models, giving us a more comprehensive evaluation of their overall performance. Additionally, we found very little differences in f1 scores between our gray and RGB models, leading us to further conclude that there is no significant difference in classifying images with our CNN when they are grayscale as opposed to left in color. ")
 image = Image.open('classificationreportgray.png')
-tab2.image(image)
+cnn.image(image)
 image = Image.open('classificationreportrgb.png')
-tab2.image(image)
-tab2.write("Lastly, we then decided to break down our accuracy metric into a confusion matrix to understand our results better. "
-           "As we know, accuracy is simply true positive added with true negative divided by the total number of predictions. "
-           "For our grayscale model, we found a slightly higher true positive value than true negative, "
-           "meaning that this particular model was best at correctly predicting when inputted images were fake (AI-generated). "
-           "On the contrary, our RGB model had a slightly higher true negative value than true positive, "
-           "meaning that this model was best at correctly predicting when inputted images were real (not AI-generated). ")
-
-with tab2:
+cnn.image(image)
+cnn.write("Lastly, we then decided to break down our accuracy metric into a confusion matrix to understand our results better. As we know, accuracy is simply true positive added with true negative divided by the total number of predictions. For our grayscale model, we found a slightly higher true positive value than true negative, meaning that this particular model was best at correctly predicting when inputted images were fake (AI-generated). On the contrary, our RGB model had a slightly higher true negative value than true positive, meaning that this model was best at correctly predicting when inputted images were real (not AI-generated). ")
+with cnn:
       col1, col2 = st.columns(2)
       image = Image.open('confusionmatrixgray.png')
       col1.image(image)
       image = Image.open('confusionmatrixrgb.png')
       col2.image(image)
 
-st.divider()
-st.title("Discussion of  PCA and CNN and Future Works:")
-st.write("Before our final report, we will also advance our data preprocessing for PCA by normalizing and centering the images. "
-         "Currently, the images are flattened for PCA preprocessing. Regarding the relationship between PCA and CNN, PCA is a "
-         "dimensionality reduction technique while CNN is a deep-learning technique that is extremely effective in image "
-         "classification tasks. To expand on our implementation of CNN, we will perform CNN using the PCA-reduced dataset against "
-         "the non-PCA-reduced dataset. This will assess the impact of PCA on the performance of CNN. Additionally, we will explore "
-         "the possibility of using a GAN combined with a CNN to improve our model’s accuracy. ")
+cnnwpca.write("Performing PCA on the gray image dataset and the RGB image dataset showed vastly different results in both the training and testing accuracy. ")
+image = Image.open('cnnwpcaresults.png')
+cnnwpca.image(image)
+cnnwpca.write("The RGB training accuracy is significantly higher than the gray training accuracy, with both training accuracies higher than the validation accuracy. The training accuracy around epoch 4 for both gray and RGB increased rapidly, while the validation accuracy began to level out at epoch 4.  The higher training accuracy indicates that the model may be overfitted; this may be due to the fact that PCA simplified the data by reducing dimensionality, making the CNN model too complex for the data. The number of convolutional and pooling layers in the CNN model for the PCA processed data set was decreased to reduce the degree of overfitting. ")
+cnnwpca.write("To evaluate the effectiveness of the models, we generated precision, recall, and f1 scores to compare the models and draw more insightful conclusions. There was a 3% difference in the f1 score between the gray and RGB datasets, indicating that performing PCA on the datasets does impact how well the model classified images when they are grayscale as opposed to left in color. ")
+image = Image.open('cnnwpcaclassreport.png')
+cnnwpca.image(image)
+cnnwpca.write("The confusion matrix below further evaluates our accuracy metric. The RGB model had an accuracy of 89%, while the grayscale model had an accuracy of 86%. This means that CNN performed better when the dimensionality of the dataset was higher. PCA with 298 components reduced the dimensionality of both datasets by 83.87%, and making the images gray resulted in a lower-dimensional 2D array rather than the 3D array needed for RGB images. With a higher dimensionality, our CNN model was able to exploit the spatial relationships more effectively, resulting in a higher accuracy for our RGB model. Additionally, the RGB model had a higher precision, recall, and f1 score than the gray model, further validating the claim that our CNN model performs better when the dimensionality of the dataset is higher. It is important to note that PCA with 298 components was chosen as our unsupervised learning analysis showed that 298 components resulted in 95% cumulative expected variance. ")
+cnnwpca.write("Regarding identifying AI-generated versus real images, the RGB model had a higher true negative value, meaning that it is the best at correctly identifying when inputted images are real in cases when PCA is and is not performed on the dataset. Additionally, the RGB model is also better at identifying when inputted images are fake (AI-generated) as it has a higher true positive value as well. ")
+with cnnwpca:
+      col1, col2 = st.columns(2)
+      image = Image.open('confusionmatrixgraycnnwpca.png')
+      col1.image(image)
+      image = Image.open('confusionmatrixrgbcnnwpca.png')
+      col2.image(image)
+
+nb.write( "In order to evaluate the performance of our Naive Bayes model, we plotted a confusion matrix showing the number of true positives, true negatives, false positives, and false negatives of each model. From these values, we were able to computationally derive the accuracy, precision, recall and f1 scores. The model had an overall accuracy of 60.30% for grayscale images, and 60.33% for RGB images. As it can be seen, both models performed relatively poorly at classifying images as real or AI-generated." )
+with nb:
+      col1, col2 = st.columns(2)
+      image = Image.open('nbconfusionmatrixgray.png')
+      col1.image(image)
+      image = Image.open('nbconfusionmatrixrgb.png')
+      col2.image(image)
+nb.write( "Although this model did not perform as well as our other methods, it’s not surprising given that Naive Bayes is inherently built on the naive assumption that features of the input data are independent of each other. It’s likely that the features of our input data are correlated, thus causing this assumption to be inaccurate. Additionally since we used a Gaussian distribution, it might be the case that our data doesn’t closely follow a continuous normal distribution. For future purposes, it might be valuable to compare the Naive Bayes model on Bernoulli or Multinomial distributions. In general while the independence of Naive Bayes allows for a computationally fast and simple approach, there is a tradeoff in accuracy when the assumption does not hold.")
+
+lr.write("For our logistic regression model, we yielded very different results between our grayscale and RGB datasets. Our accuracy metric was quite high for our grayscale model, landing at around ~93.97%. Accuracy for the RGB data landed at around ~67.15%. Similarly, our loss (calculated via Scikit’s log loss function) differed substantially between our two color variations. For our grayscale model, loss landed at around ~2.099; in comparison, loss for our RGB data was around ~11.346. Given this difference, we suspect that this particular supervised model was better suited for our data when it was preprocessed to be in grayscale. While there are many reasons why this may be the case, we mostly suspect feature redundancy/noise within our RGB dataset due to the increased number of channels. For this particular classification task, logistic regression might not be able to effectively distinguish between useful color features and irrelevant ones, further leading to reduced performance. Grayscaling images reduces the complexity of the data by converting it to a single channel-- this can simplify the learning process, thus making it easier to identify relevant patterns and features for classification. In addition, ​​grayscale images might offer better class separability compared to color images. This could be due to the nature of the images and/or how color information is distributed across the two classes, causing RGB data to not fit well to the linearly-separable assumption that logistic regression holds to.")
+lr.write("Similar to our CNN model, we decided to further investigate our results by leveraging more informative evaluation metrics such as precision, recall, and f1. Additionally, we also generated confusion matrices for both color-variant datasets.")
+lr.write("As shown below, our classification reports yielded very consistent values for precision, recall, and f1 scores for both our grayscale data and our RGB data. In addition, these values were also very similar to our accuracy score. While this observation originally made us skeptical of our model implementation, upon further analysis, we concluded that we simply encountered a rare case given that our data is evenly balanced between the two labels.  ")
+image = Image.open('grayclassreportnb.png')
+lr.image(image)
+image = Image.open('rgbclassreportnb.png')
+lr.image(image)
+lr.write("Assuming that precision, recall, and f1 are calculated as shown below, we can actually solve a system of equations to find that all three values can be equal when false positive (FP) = false negative (FN). While rare, this result is not necessarily impractical given we are using a perfectly balanced dataset. ")
+image = Image.open('equation.png')
+lr.image(image)
+lr.write("However, to verify further, we conducted a few manual calculations to find our total amounts of false positives and false negatives. As shown below, we can see that in both cases, we had nearly identical false positive and false negative values, leading us to verify the conclusion drawn above. ")
+with lr:
+      col1, col2 = st.columns(2)
+      image = Image.open('grayclasstotals.png')
+      col1.image(image)
+      image = Image.open('rgbclasstotals.png')
+      col2.image(image)
+lr.write("Our confusion matrices showed a similar symmetric property, further reinforcing our outcome and helping us visualize this special case. These matrices are shown below. Once again, while unlikely, symmetric confusion matrices typically indicate that the model is performing equally well (or equally poorly) on both classes in this particular dataset. While the balanced dataset is a good candidate to explain why this occurred, this could also be due to the features of each image not providing enough discriminatory information between the two classes.")
+with lr:
+      col1, col2 = st.columns(2)
+      image = Image.open('lrconfusiongray.png')
+      col1.image(image)
+      image = Image.open('rgbconfusionlr.png')
+      col2.image(image)
 
 st.divider()
-st.title("Contribution Table:")
-image = Image.open('contributionchart.png')
+st.title("Comparison of Methods: ")
+st.write("After analyzing each of the four methods we utilized to classify our dataset, namely Convolutional Neural Network, Convolution Neural Network with Principal Component Analysis Processed Data, Naive Bayes Classifier, and Logistic regression, we looked more closely at their associated metrics to identify the best method to utilize for our purpose as well as whether or not the images should be grayscale or RGB. We decided to utilize these methods to address our goal as they have been previously used for other image classification purposes as described in literature. The tables below summarize the results with the first table comparing the methods for the grayscale images and the second table comparing the methods for the RGB images.")
+image = Image.open('grayscalemethods.png')
 st.image(image)
+image = Image.open('rgbmethods.png')
+st.image(image)
+st.write("At the start, we were interested in exploring whether or not dimensionality reduction was required for successful classification of real vs AI-generated images. To do so, we ran a convolutional neural network on the original, non-modified images and then ran a convolutional neural network on the PCA-processed images. Regarding performing PCA on the dataset prior to inputting it into a CNN model, it was found that CNN performed better when the data preprocessing did not include PCA. One reason for this result is that PCA results in the loss of information as it projects data onto a lower-dimensional subspace. If the information lost includes essential patterns and relationships, then CNN can struggle to learn meaningful relationships in the dataset and accurately identify if the images are real or AI-generated. Another reason that performing PCA on the dataset reduced the accuracy of CNN is that PCA is a linear transformation. CNN models are designed to identify non-linear relationships in data. Thus, performing a linear transformation on the dataset may remove the non-linear relationships and reduce the complexity of the dataset making it difficult for a CNN to automatically learn hierarchical and non-linear relationships. ")
+st.write("Furthermore, it is important to analyze how performing PCA on the dataset inputted into CNN can make the CNN model overfit. We chose to perform PCA using 298 components to preserve 95% of the variance in the dataset, rather than performing PCA using 712 components to preserve 99% of the expected variance in the dataset. This was done to reduce the risk of overfitting, as retaining more variance in a smaller dataset may result in a model performing well on training data and not generalizing well on validation data. However, even with 298 components, the CNN model showed signs of overfitting the data. This means that the reduced dataset from PCA was either too small or not representative of the original data, resulting in the CNN model learning the noise in the training data. Thus, a more generalizable CNN model was created when PCA was not performed on the dataset. ")
+st.write("Lastly, the performance of the CNN model on the PCA reduced gray and RGB dataset highlighted the fact that CNN performed better when there was more complexity in the data. For all metrics (precision, accuracy, recall, and f1-score), CNN performed better on the RGB dataset. This means that the spatial information encoded in the different color channels was essential for identifying whether an image was real or AI-generated when PCA-induced information loss occurred. Without PCA, the CNN model on the gray image dataset and RGB image dataset performed almost identically. However, performing PCA and converting the images to gray-scale resulted in the loss of essential spatial information that the CNN model needed to produce accurate results. ")
+st.write("Another aspect we were interested in exploring is whether or not the images should be grayscale or colored when determining if an image is real or AI-generated/fake. Looking at the metrics listed in the tables above, each respective method had similar accuracy, precision, recall, and f1-score values for both versions of an image except logistic regression. For logistic regression, this supervised method performed significantly better for classifying grayscale images compared to RGB images as its accuracy was 26.82% higher and its precision, recall, and f1-score was 27% higher for grayscale than colored version. Thus, if one has a dataset of grayscale images, they should ideally use logistic regression as its accuracy, precision, recall, and f1-score metrics were the highest overall. As previously described in the Supervised Learning: Logistic Regression section above, the reason for this drastic difference between grayscale and RGB images may be due to the fact that feature redundancy/noise in the RGB version of the data is more prevalent due to an increase in the number of channels from 1 for grayscale images to 3 for RGB images. ")
+st.write("Yet, in general, if one wants to be able to utilize a single method for any type of image, whether or not that image is grayscale or RGB, a CNN would be the best option. Although logistic regression has higher metrics for grayscale images compared to CNN, it does significantly worse in classifying RGB images. Therefore, CNN would be the optimal choice for classifying if images are real or AI-generated/fake. CNN is ideal as it contains multiple convolutional layers that reduce the high dimensionality of images without losing any vital information. This aspect allows a CNN to be a generalizable model that can classify unseen images at a rather high accuracy. On the other hand, Naive Bayes performed the worst for image classification and therefore, should not be used. This could be due to the fact that although Naive Bayes can train fast, it has difficulty in handling unknown features. Therefore, based on the metrics displayed above, CNN is the best choice for classifying images as real or AI-generated as it has the capabilities to easily extract features from images and recognize the patterns that exist within them compared to naive bayes classifier and logistic regression. ")
+
+st.divider()
+st.title("Conclusion")
+st.write("Our goal was to identify the optimal machine learning technique that can easily and successfully classify if an image is real or AI-generated at a level of accuracy higher than human classification (61.3%) and ideally higher than current AI model accuracy (~87%). In a world where AI is becoming more prevalent, this is more important than ever as false images can alter one’s perception of reality and historical events, amplify stereotypes, and impede on an individual's creativity. Identifying a technique that can classify the integrity of images is essential as humans misclassify real images from AI-generated ones 38.7% of the time (Lu et al., 2023). Thus, throughout the project, we explored different data pre-processing techniques as well as various unsupervised and supervised learning methods to achieve the best results.")
+st.write("For this project, we desired to explore various techniques to determine if one yielded better results than the other. The four main methods we tested were Convolutional Neural Networks, Convolutional Neural Networks with PCA processed data, Naive Bayes, and Logistic Regression. We first started by determining if there was a need to pre-process the data via PCA prior to running it into CNN. However, based on our findings described above, this additional data pre-processing step is not required as CNN’s accuracy with the non-PCA processed images is about 3% higher than CNN’s accuracy with PCA-processed images. Simultaneously, we analyzed the differences in model accuracy, precision, recall, and f1-score if the images were grayscale or RGB. With the exception of logistic regression, all methods had similar metrics for both versions of the image. We identified that the reason for the differences in the logistic regression metrics was due to higher feature redundancy/noise in the RGB images compared to the grayscale images. Although logistic regression had the highest metrics for grayscale images out of all the methods, CNN is the best option as it is able to classify any type of image as real or AI-generated at ~91% accuracy rate. ")
+st.write("In conclusion, we were able to achieve our goal of identifying a machine learning technique that has the capability to identify images as real or fake at a level of accuracy higher than human classification (61.3%) and existing AI model accuracy (~87%). In our case, CNN was the ideal method that satisfied our purpose and had the capability to classify all types of images at a high accuracy rate of ~91%. Utilizing this technique to facilitate in identifying the validity of images circulating in the world and in the media is promising and exploration on how to further refine and perfect the CNN could have significant societal benefits.")
+st.write( "Contribution table: ")
+image = Image.open('contribution.png')
+st.image(image)
+
 
 st.divider()
 st.title("Gantt Chart: ")
