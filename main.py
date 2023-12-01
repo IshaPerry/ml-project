@@ -8,19 +8,8 @@ st.caption("Members: Sydney Defelice, Claire Matheny, Isha Perry, Ariane Richard
 st.divider()
 
 st.title("Introduction/Background")
-st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, "
-            "which oftentimes serve as proof of an event. In fact, research shows that humans misclassify real images "
-            "from AI-generated ones at a rate of 38.7% (Lu et al., 2023). AI-generated images can have widespread negative "
-            "impacts by creating false alibis, taking creative reins from real people, amplifying stereotypes, and attempting "
-            "to falsify historical and current events (Partadiredja et al., 2020; Ragot et al., 2020; Tiku et al., 2023; Verma, 2023). "
-            "It is important, more than ever, that people are able to quickly tell an AI-generated image from a real one, "
-            "especially in an age where data reliability and authentication is essential (Bird & Lotfi, 2023). "
-            "The world is already a chaotic place, rife with political tensions and obsessions over social media, "
-            "and the last thing the world needs is fake images spreading misinformation.")
-st.markdown("The dataset utilized for this project is obtained from https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images/data and contains 120,000 images."
-            " Its features consist of 60,000 synthetically generated (fake) images made with Stable Diffusion and 60,000"
-            " real images obtained from CIFAR-10 (Krizhevsky & Hilton, 2023; Bird & Lotfi, 2023). 10,000 images of each category"
-            " make up the testing data, while the remaining are the training data.")
+st.markdown("Artificial Intelligence (AI) generated images lead to a mistrust in the reliability of photographs, which oftentimes serve as proof of an event. In fact, research shows that humans misclassify real images from AI-generated ones at a rate of 38.7% (Lu et al., 2023). AI-generated images can have widespread negative impacts by creating false alibis, taking creative reins from real people, amplifying stereotypes, and attempting to falsify historical and current events (Partadiredja et al., 2020; Ragot et al., 2020; Tiku et al., 2023; Verma, 2023). It is important, more than ever, that people are able to quickly tell an AI-generated image from a real one, especially in an age where data reliability and authentication are essential (Bird & Lotfi, 2023). The world is already a chaotic place, rife with political tensions and obsessions over social media, and the last thing the world needs is fake images spreading misinformation.")
+st.markdown (" The dataset utilized for this project is obtained from https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images/data and contains 120,000 images. Its features consist of 60,000 synthetically generated (fake) images made with Stable Diffusion and 60,000 real images obtained from CIFAR-10 (Krizhevsky & Hilton, 2023; Bird & Lotfi, 2023). 10,000 images of each category make up the testing data, while the remaining are the training data")
 st.divider()
 
 st.title("Problem Definition")
