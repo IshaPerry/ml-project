@@ -13,23 +13,14 @@ st.markdown (" The dataset utilized for this project is obtained from https://ww
 st.divider()
 
 st.title("Problem Definition")
-st.markdown("AI-generated images allow for the manipulation of reality. "
-            " The motivation of this project is to identify images as real (non-AI-generated) or fake (AI-generated) to a"
-            " level of accuracy higher than human classification (61.3%) and ideally higher than existing AI model accuracy (~87%)"
-            " (Lu et al., 2023).")
+st.markdown("AI-generated images allow for the manipulation of reality. The motivation of this project is to identify images as real (non-AI-generated) or fake (AI-generated) to a level of accuracy higher than human classification (61.3%) and ideally higher than existing AI model accuracy (~87%) (Lu et al., 2023).")
 st.divider()
 
 st.title("Data Preprocessing")
-st.write("Prior to working with our unsupervised and supervised learning models, it was necessary to clean and pre-process "
-         "the data to run the models successfully. As described above, our dataset was pre-sorted into real and fake images "
-         "which was further divided into training and testing datasets. Additionally, the dataset indicated that it was pre-cleaned "
-         "and contained no duplicates. Therefore, we performed the following tasks to pre-process our dataset for CNN:")
+st.write("Prior to working with our unsupervised and supervised learning models, it was necessary to clean and pre-process the data to run the models successfully. As described above, our dataset was pre-sorted into real and fake images which was further divided into training and testing datasets. Additionally, the dataset indicated that it was pre-cleaned and contained no duplicates. Therefore, we performed the following tasks to pre-process our dataset for CNN:")
 
 tab1, tab2, tab3 = st.tabs(["Resize the Images", "Normalize the Images", "Generate Grayscale and Color (RGB) Versions of the Images"])
-tab1.write("To ensure that all the images have the same dimensions, we resized the images to be (32x32x3)."
-           "This will help ensure that our dataset can properly run in our models. To do so, when importing our"
-           "images using the image_dataset_from_directory method from the tensorflow keras package, we changed"
-           "the size of the image by specifying the image_size metric to be (32, 32). Below is a snippet of our code:")
+tab1.write("To ensure that all the images have the same dimensions, we resized the images to be (32x32x3). This will help ensure that our dataset can properly run in our models. To do so, when importing our images using the image_dataset_from_directory method from the tensorflow keras package, we changed the size of the image by specifying the image_size metric to be (32, 32). Below is a snippet of our code:")
 tab1.code("tf_train_data = image_dataset_from_directory(directory = train_dir, label_mode = 'binary', image_size = (32, 32), shuffle=True)", language="python")
 tab1.write("The image below displays 9 random images from our training data set and how they have been resized. The label above each image indicates their predetermined label.")
 image = Image.open('resizedImages.png')
@@ -59,37 +50,28 @@ with tab3:
 st.divider()
 
 st.title("Methods")
-tab1, tab2 = st.tabs(["Unsupervised Learning: Principal Component Analysis (PCA)", "Supervised Learning: Convolutional Neural Network (CNN)"])
-tab1.write("For our unsupervised learning model, we decided to use Principal Component Analysis (PCA). "
-           "PCA is used for dimensionality reduction and feature extraction, lending itself well to our input of high-dimensional images. "
-           "It can also help filter noisy data by emphasizing principal components where data exhibits the most variance. "
-           "Thus, in addition to analyzing PCA on its own, we can also treat it as a type of data pre-processing to feed into "
-           "our Convolutional Neural Network. ")
-tab1.write("We loaded, flattened, and standardized the images and applied PCA to our dataset using the SciKit-Learn library. "
-           "As part of our PCA implementation, we tested all possible principal components against the cumulative expected variance, "
-            "iterating from 1 component to 3072 components (the number of original features in the matrix). "
-            "Lastly, we plotted a graph comparing the number of principal components to the cumulative explained variance "
-            "for further analysis.")
-tab1.write("Below is a snippet of the PCA code. ")
-tab1.code("n_components = data_matrix.shape[1]\npca = PCA(n_components=n_components)\npca.fit(data_matrix)", language="python")
-tab2.write("For our supervised learning model, we decided to use a Convolutional Neural Network (CNN). "
-           "CNNs are designed for image recognition and recognition-based tasks, making it ideal for our goal "
-           "of classifying images as either real or AI-generated. This model sequentially uses inputs from the previous "
-           "layer to learn patterns in data adaptively.")
-tab2.write("In order to implement CNN, we leveraged Keras (a library built on top of Tensorflow). "
-           "Our neural network consists of three convolutional layers with max-pooling layers in between. "
-           "Max pooling improves computational complexity by reducing spatial dimensions, thus enabling transition invariance between layers. "
-           "The first convolutional layer uses 32 filters that correspond with the input shape of (32, 32, 1) for grayscale "
-           "images and (32, 32, 3) for RGB images. Additionally, we use the ReLu activation function to introduce non-linearity in the data. "
-           "In the next convolutional layer, we increase the number of filters to 64 in order to learn even more complex patterns. "
-           "The last convolutional layer applies 64 filters and ReLu activation another time. The sequence of each of our layers is shown below:")
+pca, cnn, nb, lr = st.tabs(["Unsupervised Learning: Principal Component Analysis (PCA)", "Supervised Learning: Convolutional Neural Network (CNN)", "Supervised Learning: Naive Bayes Classifier", "Supervised Learning: Logistic Regression"])
+pca.write("For our unsupervised learning model, we decided to use Principal Component Analysis (PCA). PCA is used for dimensionality reduction and feature extraction, lending itself well to our input of high-dimensional images. It can also help filter noisy data by emphasizing principal components where data exhibits the most variance. Thus, in addition to analyzing PCA on its own, we can also treat it as a type of data pre-processing to feed into our Convolutional Neural Network. ")
+pca.write("We loaded, flattened, centered, and standardized the images and applied PCA to our dataset using the SciKit-Learn library. As part of our PCA implementation, we tested all possible principal components against the cumulative expected variance, iterating from 1 component to 3072 components (the number of original features in the matrix). Lastly, we plotted a graph comparing the number of principal components to the cumulative explained variance for further analysis. ")
+pca.write("Below is a snippet of the PCA code. ")
+pca.code("n_components = data_matrix.shape[1]\npca = PCA(n_components=n_components)\npca.fit(data_matrix)", language="python")
+cnn.write("For our supervised learning model, we decided to use a Convolutional Neural Network (CNN). CNNs are designed for image recognition and recognition-based tasks, making it ideal for our goal of classifying images as either real or AI-generated. This model sequentially uses inputs from the previous layer to learn patterns in data adaptively.")
+cnn.write("In order to implement CNN, we leveraged Keras (a library built on top of Tensorflow). Our neural network consists of three convolutional layers with max-pooling layers in between. Max pooling improves computational complexity by reducing spatial dimensions, thus enabling transition invariance between layers. The first convolutional layer uses 32 filters that correspond with the input shape of (32, 32, 1) for grayscale images and (32, 32, 3) for RGB images. Additionally, we use the ReLu activation function to introduce non-linearity in the data. In the next convolutional layer, we increase the number of filters to 64 in order to learn even more complex patterns. The last convolutional layer applies 64 filters and ReLu activation another time. The sequence of each our layers is shown below:")
 image = Image.open('flowchart_updated.jpeg')
-tab2.image(image)
-tab2.write("At first, we ran the model using 5 epochs. However, we noticed that the accuracy of testing data for both "
-           "grayscale and RGB images was higher than the accuracy of training data. This result goes against our intuition that, "
-           "initially, training should be more accurate than testing. Additionally, the accuracy of these models fluctuates "
-           "greatly for all datasets. Thus, we decided to fine-tune our number of epochs to 10. With this adjustment, "
-           "the accuracy levels for both grayscale and RGB images leveled off acceptably.")
+cnn.image(image)
+cnn.write("At first, we ran the model using 5 epochs. However, we noticed that the accuracy of testing data for both grayscale and RGB images was higher than the accuracy of training data. This result goes against our intuition that, initially, training should be more accurate than testing. Additionally, the accuracy of these models fluctuates greatly for all datasets. Thus, we decided to fine-tune our number of epochs to 10. With this adjustment, the accuracy levels for both grayscale and RGB images leveled off acceptably. ")
+cnn.write("Along with modifying the number of epochs and running CNN on both grayscale and RGB images, we ran CNN with PCA-processed data as well. This is essential, as reducing the dimensionality and noise in a dataset can create a more generalizable model; this is because a model that is trained on lower-dimensional data can be less likely to overfit. However, pre-processing the CNN data using PCA can have drawbacks, as PCA may not maintain the image’s spatial relationships when it reduces the dimensionality. This can hinder the accuracy of CNN, as CNN is designed to exploit the spatial structure of data. Furthermore, CNN is a non-linear model, and applying PCA as a linear transformation may remove complex non-linear relationships in the data set. ")
+cnn.write("Thus, we will compare the accuracy of applying CNN on both the grayscale image and RGB image data sets before and after PCA is performed in preprocessing. ")
+nb.write("Given that we are solving a classification problem, we decided to implement Naive Bayes. Naive Bayes is based on the assumption that all features of the input data are probabilistically independent of each other. While this assumption is not always the case in real life, it provides an efficient and simple approach to supervised learning. Since our project deals with classifying images as either real or AI-generated, we safely assume that the predictors of each image (i.e. RGB channels, shape, pixels) used are independent of each other. All in all, Naive Bayes provides a simple yet informative baseline classification.")
+nb.write(" In order to implement Naive Bayes, we leveraged GaussianNB from the Scikit-learn library. We used a gaussian distribution since features are continuous and normally distributed. First, we trained the Naive Bayes classifier on RGB and grayscale images separately. To reiterate, our input data was processed by loading, flattening, and reshaping. After training the models, we predicted the classification label of each image. Finally, we used more Scikit metric classes to generate precision, recall, and f1 scores, in addition to a confusion matrix to better understand our results. ")
+nb.write(" Below is a snippet of our logistic regression code. ")
+nb.code("nb_gray = BernoulliNB()\np_rgb = BernoulliNB()\ny_pred_gray = nb_gray.fit(X_reshaped_gray, y_gray).predict(X_reshaped_gray)\ny_pred_rgb = nb_rgb.fit(X_reshaped_rgb, y_rgb).predict(X_reshaped_rgb)", language="python")
+lr.write("To further investigate how additional supervised models might perform when classifying real versus AI generated images, we also decided to implement logistic regression. In general, the discriminatory nature of logistic regression makes it well suited for finding links between features and labels, further making it a popular method for classification problems. However, the performance of this method is often limited when faced with highly non-linear problems and/or intricate relationships within input data. Hence, it's important to complement its usage with feature engineering and tuning for diverse problem sets. Thus, we found that it would be useful to compare different preprocessing techniques (grayscale versus RGB) for this method as well. ")
+lr.write("In order to implement logistic regression, we decided to use the Scikit-learn library, which aligns well with our task given that it functions primarily as a binary classifier. In addition, by default the logistic regression class of this library applies regularization, which helps improve numerical stability. This parameter is also adjustable to allow model fine-tuning, and we found that values of 0.01 worked best for both the grayscale data and the RGB data. This class also provides several solvers for optimization, but in both cases, we found that the default solver (the Broyden–Fletcher–Goldfarb–Shanno algorithm) yielded the best results. This quasi-Newtonian solver utilizes ℓ2 (aka ridge) regularization to iteratively approximate the second derivative, and hence descent direction, for unconstrained optimization problems. ")
+lr.write("After fine-tuning our regression parameters, we fit our preprocessed data to the model and used built-in Scikit functions to generate various evaluation metrics, such as accuracy. Afterwards, we used more Scikit metric classes to generate precision, recall, and f1 scores, in addition to a confusion matrix to better understand our results.")
+lr.write("Below is a snippet of our logistic regression code. ")
+lr.write( "logreg = LogisticRegression(C = 0.15)\nresults = logreg.fit(x_train, y_train)\ny_pred = logreg.predict(x_test)\nscore = logreg.score(x_test, y_test)\n print('logistic regression accuracy: ' + str(score))" )
+
 
 
 st.divider()
